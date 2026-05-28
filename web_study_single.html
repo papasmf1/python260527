@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML5 + CSS3 + JavaScript Study Page</title>
+  <style>
+    :root {
+      --bg: #f6f7eb;
+      --paper: #fffdf6;
+      --ink: #1b1b1b;
+      --accent: #e4572e;
+      --accent-2: #17bebb;
+      --line: #d7d1c6;
+      --ok: #2e8540;
+      --danger: #c0392b;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, #ffe3b3 0 18%, transparent 20%),
+        radial-gradient(circle at 90% 20%, #b8f2e6 0 14%, transparent 16%),
+        linear-gradient(160deg, #f6f7eb 0%, #f0ece2 55%, #f6f7eb 100%);
+      min-height: 100vh;
+      padding: 28px 16px 50px;
+    }
+
+    .container {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero,
+    .panel {
+      background: var(--paper);
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 22px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -55px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+      z-index: -1;
+      animation: bob 4s ease-in-out infinite;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    h1, h2 {
+      margin: 0 0 10px;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: 0.5px;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 70ch;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 16px;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: reveal 500ms ease forwards;
+    }
+
+    .panel:nth-child(2) { animation-delay: 80ms; }
+    .panel:nth-child(3) { animation-delay: 160ms; }
+
+    @keyframes reveal {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .codebox {
+      margin: 10px 0 14px;
+      padding: 10px 12px;
+      background: #202124;
+      color: #e8eaed;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-family: "Consolas", monospace;
+      font-size: 0.9rem;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button,
+    input {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    button {
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .primary {
+      background: var(--accent);
+      border-color: transparent;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .secondary {
+      background: var(--accent-2);
+      border-color: transparent;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    li {
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      border: 1px solid currentColor;
+    }
+
+    .success { color: var(--ok); }
+    .warning { color: var(--danger); }
+
+    footer {
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 540px) {
+      .hero, .panel {
+        border-radius: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero" aria-labelledby="title">
+      <h1 id="title">HTML5 + CSS3 + JavaScript</h1>
+      <p class="lead">
+        This single file is a mini playground. Read the markup, inspect styles,
+        and test JavaScript interactions below.
+      </p>
+    </section>
+
+    <section class="grid">
+      <article class="panel" aria-labelledby="html-head">
+        <h2 id="html-head">1) HTML5 structure</h2>
+        <p>Semantic tags used on this page:</p>
+        <div class="codebox">&lt;main&gt; &lt;section&gt; &lt;article&gt; &lt;footer&gt;</div>
+        <p>Try opening DevTools and inspect the document tree.</p>
+      </article>
+
+      <article class="panel" aria-labelledby="css-head">
+        <h2 id="css-head">2) CSS3 styling</h2>
+        <p>Includes variables, gradients, animation, and responsive layout.</p>
+        <div class="codebox">:root { --accent: #e4572e; }
+@keyframes reveal { to { opacity: 1; } }
+@media (max-width: 540px) { ... }</div>
+        <button id="colorBtn" class="secondary" type="button">Change Accent</button>
+      </article>
+
+      <article class="panel" aria-labelledby="js-head">
+        <h2 id="js-head">3) JavaScript interaction</h2>
+        <div class="row">
+          <button id="countBtn" class="primary" type="button">Click Me</button>
+          <strong id="countText" aria-live="polite">Count: 0</strong>
+        </div>
+        <div class="row" style="margin-top: 12px;">
+          <input id="todoInput" type="text" placeholder="Add a study task" />
+          <button id="addBtn" type="button">Add</button>
+        </div>
+        <ul id="todoList" aria-live="polite"></ul>
+      </article>
+    </section>
+
+    <footer>
+      Edit this file and learn by changing one thing at a time.
+    </footer>
+  </main>
+
+  <script>
+    const countBtn = document.getElementById("countBtn");
+    const countText = document.getElementById("countText");
+    const colorBtn = document.getElementById("colorBtn");
+    const todoInput = document.getElementById("todoInput");
+    const addBtn = document.getElementById("addBtn");
+    const todoList = document.getElementById("todoList");
+
+    let count = 0;
+
+    countBtn.addEventListener("click", () => {
+      count += 1;
+      countText.textContent = `Count: ${count}`;
+    });
+
+    colorBtn.addEventListener("click", () => {
+      const hue = Math.floor(Math.random() * 360);
+      document.documentElement.style.setProperty("--accent", `hsl(${hue} 75% 50%)`);
+      document.documentElement.style.setProperty("--accent-2", `hsl(${(hue + 60) % 360} 70% 44%)`);
+    });
+
+    function addTodo() {
+      const value = todoInput.value.trim();
+      if (!value) {
+        todoInput.focus();
+        return;
+      }
+
+      const li = document.createElement("li");
+      const text = document.createElement("span");
+      const badge = document.createElement("span");
+      const removeBtn = document.createElement("button");
+
+      text.textContent = value;
+      badge.textContent = "study";
+      badge.className = "tag success";
+      removeBtn.textContent = "Done";
+      removeBtn.className = "warning";
+      removeBtn.type = "button";
+
+      removeBtn.addEventListener("click", () => li.remove());
+
+      li.append(text, badge, removeBtn);
+      todoList.prepend(li);
+      todoInput.value = "";
+      todoInput.focus();
+    }
+
+    addBtn.addEventListener("click", addTodo);
+    todoInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") addTodo();
+    });
+  </script>
+</body>
+</html>
